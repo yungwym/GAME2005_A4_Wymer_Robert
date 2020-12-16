@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿  using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,9 +9,15 @@ public class BulletBehaviour : MonoBehaviour
     public Vector3 direction;
     public float range;
 
+    public float radius;
+    public bool isColliding;
+
+
     // Start is called before the first frame update
     void Start()
     {
+        isColliding = false;
+        radius = Mathf.Max(transform.localScale.x, transform.localScale.y, transform.localScale.z) * 0.5f;
     }
 
     // Update is called once per frame
