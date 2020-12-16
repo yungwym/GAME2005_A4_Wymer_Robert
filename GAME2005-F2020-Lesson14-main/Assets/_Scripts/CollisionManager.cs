@@ -67,8 +67,6 @@ public class CollisionManager : MonoBehaviour
 
     public static void SphereAABB(BulletBehaviour bullet, CubeBehaviour cube)
     {
-        Debug.Log("SphereAABB");
-
         //Get box closet point to sphere center
         var x = Mathf.Max(cube.min.x, Mathf.Min(bullet.transform.position.x, cube.max.x));
         var y = Mathf.Max(cube.min.y, Mathf.Min(bullet.transform.position.y, cube.max.y));
@@ -80,16 +78,14 @@ public class CollisionManager : MonoBehaviour
 
         if (distance < bullet.radius)
         {
-
-            Debug.Log("Colliding");
             //Colliding 
             Bounce(bullet);
         }
     }
 
-
+      
     private static void Bounce(BulletBehaviour bullet)
     {
-        bullet.direction = new Vector3(bullet.direction.x, bullet.direction.y, -bullet.direction.z);
+        bullet.direction = new Vector3(bullet.direction.x, bullet.direction.y, -bullet.direction.z); 
     }
 }

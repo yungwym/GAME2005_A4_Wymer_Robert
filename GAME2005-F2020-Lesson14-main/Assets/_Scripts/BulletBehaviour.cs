@@ -12,12 +12,15 @@ public class BulletBehaviour : MonoBehaviour
     public float radius;
     public bool isColliding;
 
+    public BulletManager bulletManager;
+
 
     // Start is called before the first frame update
     void Start()
     {
         isColliding = false;
         radius = Mathf.Max(transform.localScale.x, transform.localScale.y, transform.localScale.z) * 0.5f;
+        bulletManager = FindObjectOfType<BulletManager>();
     }
 
     // Update is called once per frame
@@ -36,7 +39,7 @@ public class BulletBehaviour : MonoBehaviour
     {
         if (Vector3.Distance(transform.position, Vector3.zero) > range)
         {
-            Destroy(gameObject);
+            bulletManager.ReturnBullet(this.gameObject);
         }
     }
 }

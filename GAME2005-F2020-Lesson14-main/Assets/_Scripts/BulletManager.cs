@@ -6,34 +6,15 @@ using UnityEngine;
 public class BulletManager : MonoBehaviour
 {
     public GameObject bullet;
-
-    private static BulletManager m_instance = null;
-
-    private BulletManager()
-    {
-
-    }
-
-    public static BulletManager Instance()
-    {
-        if (m_instance == null)
-        {
-            m_instance = new BulletManager();
-        }
-        return m_instance;
-    }
-
-    public int MaxBullets { get; set;  }
-
     private Queue<GameObject> m_bulletPool;
+    public int MaxBullets;
 
-
-
-    public void Init(int maxBullets)
+    
+    void Start()
     {
-        MaxBullets = maxBullets;
         BuildPool();
-    }  
+    }
+   
 
     private void BuildPool()
     {
@@ -42,6 +23,8 @@ public class BulletManager : MonoBehaviour
         for (int count = 0; count < MaxBullets; count++)
         {
             var tempBullet = Instantiate(bullet);
+            tempBullet.transform.SetParent(transform);
+            tempBullet.SetActive(false);
             m_bulletPool.Enqueue(tempBullet);
         }
     }
@@ -54,7 +37,6 @@ public class BulletManager : MonoBehaviour
         newBullet.SetActive(true);
         newBullet.transform.position = position;
         newBullet.GetComponent<BulletBehaviour>().direction = direction;
-       // newBullet.transform.SetParent(self.gameObject.transform);
 
         return newBullet;
     }
